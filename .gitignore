@@ -1,0 +1,5 @@
+/build
+/.sconsign.dblite
+/.clang-format
+/.project
+/.cproject
