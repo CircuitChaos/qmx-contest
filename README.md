@@ -129,6 +129,7 @@ Lots of things, really. This program is in a very early stage. Feel free to open
 * Allow remapping of keys
 * Text entry is handled very poorly, basically the only way to clear entered text is Ctrl-U. Using readline() would be much better
 * When sending text, show information about characters that couldn't be mapped to Morse
+* Some smarter handling of a remote callsign – like: enter callsign, automatically send: "<callsign> 5NN <xchg>", and log this QSO
 * Add some dummy mode to be able to run the program without QMX
 * Sort this TODO list, set priorities – right now it's chaotic
 * Add some license
