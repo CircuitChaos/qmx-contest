@@ -8,7 +8,7 @@ QMX CW Contest Assistant is a program extending QMX transceiver with features us
 
 Non-exhaustive list of features:
 
-* Control VFO frequency from keyboard in 50 Hz and 1 kHz increments
+* Control VFO frequency from keyboard in 10 Hz and 1 kHz increments
 * Control RF gain from keyboard
 * Send preset and entered texts at given WPM
 * Track contest exchanges (QSO numbers sent)
@@ -57,7 +57,7 @@ Text UI is very simple and crude – that's one thing to rework. Generally you p
 ### QMX parameter control
 
 * up / down: adjust gain
-* left / right: adjust VFO frequency (50 Hz steps)
+* left / right: adjust VFO frequency (10 Hz steps)
 * pgup / pgdn: adjust VFO frequency (1 kHz steps)
 
 ### Built-in keyer

@@ -215,7 +215,7 @@ void Ui::showHelp()
 	print("");
 	print("QMX parameter control:");
 	print("- up / down: adjust gain");
-	print("- left / right: adjust VFO frequency (50 Hz steps)");
+	print("- left / right: adjust VFO frequency (10 Hz steps)");
 	print("- pgup / pgdn: adjust VFO frequency (1 kHz steps)");
 	print("");
 	print("Built-in keyer:");

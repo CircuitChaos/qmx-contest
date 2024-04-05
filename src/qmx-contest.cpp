@@ -122,14 +122,14 @@ static void main2(int ac, char *const av[])
 				// TODO redo freq, add some limits or rollbacks, do it smarter
 				// TODO don't touch freq when keyer is active
 				case Ui::EVT_FREQ_UP_SLOW: {
-					const uint32_t freq(cat.getFreq() + 50);
+					const uint32_t freq(cat.getFreq() + 10);
 					ui.print("Set freq to %u.%03u kHz", freq / 1000, freq % 1000);
 					cat.setFreq(freq);
 					break;
 				}
 
 				case Ui::EVT_FREQ_DOWN_SLOW: {
-					const uint32_t freq(cat.getFreq() - 50);
+					const uint32_t freq(cat.getFreq() - 10);
 					ui.print("Set freq to %u.%03u kHz", freq / 1000, freq % 1000);
 					cat.setFreq(freq);
 					break;
