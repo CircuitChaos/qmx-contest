@@ -98,7 +98,7 @@ On keyup:
 * VFO frequency is restored
 * QMX is switched to CW mode
 
-That's a lot of steps per symbol, so if it results in a jittery code being generated (it didn't in my tests), a `-q` option can be used to change this behavior. When using `q`, preparation (mode switch and VFO adjustment) will be done only once, at the beginning of a string (before sending it), and restoration after the whole string finishes sending.
+That's a lot of steps per symbol, so if it results in a jittery code being generated (it didn't in my tests), a `-q` option can be used to change this behavior. When using `-q`, preparation (mode switch and VFO adjustment) will be done only once, at the beginning of a string (before sending it), and restoration after the whole string finishes sending.
 
 ## TODO
 
