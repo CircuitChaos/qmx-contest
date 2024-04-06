@@ -106,8 +106,8 @@ Lots of things, really. This program is in a very early stage. Feel free to open
 
 * Exchange should be editable in UI
 * UI interactions should be optionally logged to some file
-* Add some thread to read incoming audio and display its average intensity over time (FFT waterfall is not really needed, something simpler should do), so it would be possible to decode Morse visually if it's too fast for the ears
-* Add incoming audio recording
+* Add some thread to read incoming audio and display its average intensity over time (FFT waterfall is not really needed, something simpler should do), so it would be possible to decode Morse visually if it's too fast for the ears; might not be needed, as Audacity does great job as a recorder with preview
+* Add incoming audio recording; probably not needed, see above comment about Audacity
 * Rework text UI (keyboard handling is done in a quick, dirty, and possibly buggy way – use ncurses)
 * Make sound handling more portable (now it uses raw ALSA, maybe portaudio would be better)
 * Only VFO A is supported – detect VFO and adjust CAT commands instead
@@ -129,8 +129,19 @@ Lots of things, really. This program is in a very early stage. Feel free to open
 * Allow remapping of keys
 * Text entry is handled very poorly, basically the only way to clear entered text is Ctrl-U. Using readline() would be much better
 * When sending text, show information about characters that couldn't be mapped to Morse
-* Some smarter handling of a remote callsign – like: enter callsign, automatically send: "&lt;callsign&gt; 5NN &lt;xchg&gt;", and log this QSO
+* Some smarter handling of a remote callsign – to set it as the current callsign (inserted into presets, checked against the log), or even: enter callsign, automatically send: "&lt;callsign&gt; 5NN &lt;xchg&gt;", and log this QSO
+* Time freeze mode before logging (so we can listen to the QSO again and log it at proper time)
+* Log editing (at least last entry)
+* Log into Cabrillo in uppercase
+* Add frequency presets, or at least one default frequency (set from CLI)
+* Info about number of QSOs in log
+* Mute function
+* Info about bad command key pressed
+* Reloading of log file
+* Generally: log file submenu
+* More Q-codes in presets (at least „QRL?”)
 * Add some dummy mode to be able to run the program without QMX
+* Maybe add support for hamlib and other rigs via it
 * Sort this TODO list, set priorities – right now it's chaotic
 * Add some license
 
