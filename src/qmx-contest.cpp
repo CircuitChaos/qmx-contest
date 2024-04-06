@@ -136,14 +136,14 @@ static void main2(int ac, char *const av[])
 				}
 
 				case Ui::EVT_FREQ_UP_FAST: {
-					const uint32_t freq(cat.getFreq() + 1000);
+					const uint32_t freq(cat.getFreq() + 250);
 					ui.print("Set freq to %u.%03u kHz", freq / 1000, freq % 1000);
 					cat.setFreq(freq);
 					break;
 				}
 
 				case Ui::EVT_FREQ_DOWN_FAST: {
-					const uint32_t freq(cat.getFreq() - 1000);
+					const uint32_t freq(cat.getFreq() - 250);
 					ui.print("Set freq to %u.%03u kHz", freq / 1000, freq % 1000);
 					cat.setFreq(freq);
 					break;
