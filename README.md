@@ -140,7 +140,6 @@ Lots of things, really. This program is in a very early stage. Feel free to open
 * Reloading of log file
 * Generally: log file submenu
 * More Q-codes in presets (at least „QRL?”)
-* Add some dummy mode to be able to run the program without QMX
 * Maybe add support for hamlib and other rigs via it
 * Sort this TODO list, set priorities – right now it's chaotic
 * Add some license

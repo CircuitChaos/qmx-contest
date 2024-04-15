@@ -1,10 +1,10 @@
 #pragma once
 
-#include "qmxcat.h"
+#include "cat.h"
 
 class CWControl {
 public:
-	CWControl(QMXCat &cat, unsigned toneFreq, bool qsk);
+	CWControl(Cat &cat, unsigned toneFreq, bool qsk);
 	~CWControl();
 
 	void start();
@@ -19,7 +19,7 @@ private:
 		MODE_KEYDOWN,
 	};
 
-	QMXCat &cat;
+	Cat &cat;
 	const unsigned toneFreq;
 	const bool qsk;
 	uint32_t vfoFreq{0};

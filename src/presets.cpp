@@ -11,6 +11,7 @@ Presets::Presets(const std::string &callsign)
 	presets.push_back("PLACEHOLDER"); // TODO hack
 	presets.push_back("AGN");
 	presets.push_back("QRS");
+	presets.push_back("QRL?");
 	presets.push_back("TU");
 }
 

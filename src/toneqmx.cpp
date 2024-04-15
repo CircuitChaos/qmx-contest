@@ -5,7 +5,7 @@
 #include "alsadev.h"
 #include "alsahwparams.h"
 #include "exception.h"
-#include "qmxtone.h"
+#include "toneqmx.h"
 
 static const unsigned SAMPLE_RATE = 48000;
 static const unsigned BUF_SIZE    = 4096;
@@ -102,7 +102,7 @@ static void threadFunc(std::string alsaDev, Pipe *pipe, volatile bool *exitFlag)
 	}
 }
 
-QMXTone::QMXTone(const std::string &alsaDev)
+ToneQMX::ToneQMX(const std::string &alsaDev)
 {
 	thread = std::thread(threadFunc, alsaDev, &notifyPipe, &exitFlag);
 
@@ -112,19 +112,19 @@ QMXTone::QMXTone(const std::string &alsaDev)
 	}
 }
 
-QMXTone::~QMXTone()
+ToneQMX::~ToneQMX()
 {
 	exitFlag = true;
 	notifyPipe.readChar();
 	thread.join();
 }
 
-int QMXTone::getNotifyFD() const
+int ToneQMX::getNotifyFD() const
 {
 	return notifyPipe.getReadEnd();
 }
 
-unsigned QMXTone::getFreq() const
+unsigned ToneQMX::getFreq() const
 {
 	return TONE_FREQ;
 }

@@ -1,7 +1,7 @@
 #include "cwcontrol.h"
 #include "exception.h"
 
-CWControl::CWControl(QMXCat &cat, unsigned toneFreq, bool qsk)
+CWControl::CWControl(Cat &cat, unsigned toneFreq, bool qsk)
     : cat(cat), toneFreq(toneFreq), qsk(qsk)
 {
 }

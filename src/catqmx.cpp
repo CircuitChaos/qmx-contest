@@ -6,12 +6,12 @@
 #include <cerrno>
 #include <fcntl.h>
 #include "exception.h"
-#include "qmxcat.h"
+#include "catqmx.h"
 #include "util.h"
 
 static const unsigned TIMEOUT = 3;
 
-QMXCat::QMXCat(const std::string &port)
+CatQMX::CatQMX(const std::string &port)
     : fd(open(port.c_str(), O_RDWR | O_NOCTTY))
 {
 	xassert(fd != -1, "Could not open device %s: %m", port.c_str());
@@ -34,17 +34,17 @@ QMXCat::QMXCat(const std::string &port)
 	xassert(exchange("ID;", 6) == "ID020;", "Invalid radio ID");
 }
 
-QMXCat::~QMXCat()
+CatQMX::~CatQMX()
 {
 	tcdrain(fd);
 }
 
-int QMXCat::getFD() const
+int CatQMX::getFD() const
 {
 	return fd;
 }
 
-void QMXCat::sendReq(const std::string &s)
+void CatQMX::sendReq(const std::string &s)
 {
 	// TODO this does not work, do it differently (util::watch())
 	char buf[1024];
@@ -58,7 +58,7 @@ void QMXCat::sendReq(const std::string &s)
 	xassert(rs == (ssize_t) s.size(), "Tried to send %zu bytes to QMX, but only %zd sent", s.size(), rs);
 }
 
-std::string QMXCat::recvRsp(size_t numBytes)
+std::string CatQMX::recvRsp(size_t numBytes)
 {
 	std::string str;
 	size_t remaining(numBytes);
@@ -106,37 +106,37 @@ std::string QMXCat::recvRsp(size_t numBytes)
 	return str;
 }
 
-std::string QMXCat::exchange(const std::string &req, size_t numResponseBytes)
+std::string CatQMX::exchange(const std::string &req, size_t numResponseBytes)
 {
 	sendReq(req);
 	return recvRsp(numResponseBytes);
 }
 
-unsigned QMXCat::getGain()
+unsigned CatQMX::getGain()
 {
 	const std::string rsp(exchange("AG;", 7));
 	xassert(rsp.substr(0, 2) == "AG" && rsp[rsp.size() - 1] == ';', "Invalid response to AG");
 	return strtol(rsp.substr(2, 4).c_str(), NULL, 10);
 }
 
-void QMXCat::setGain(unsigned gain)
+void CatQMX::setGain(unsigned gain)
 {
 	sendReq(util::format("AG%03u;", gain));
 }
 
-uint32_t QMXCat::getFreq()
+uint32_t CatQMX::getFreq()
 {
 	const std::string rsp(exchange("FA;", 14));
 	xassert(rsp.substr(0, 2) == "FA" && rsp[rsp.size() - 1] == ';', "Invalid response to FA");
 	return strtol(rsp.substr(2, 11).c_str(), NULL, 10);
 }
 
-void QMXCat::setFreq(uint32_t freq)
+void CatQMX::setFreq(uint32_t freq)
 {
 	sendReq(util::format("FA%07u;", freq));
 }
 
-bool QMXCat::isCW()
+bool CatQMX::isCW()
 {
 	const std::string rsp(exchange("MD;", 4));
 	if(rsp == "MD3;") {
@@ -152,12 +152,12 @@ bool QMXCat::isCW()
 	return false;
 }
 
-void QMXCat::setCW(bool cw)
+void CatQMX::setCW(bool cw)
 {
 	sendReq(util::format("MD%d;", cw ? 3 : 6));
 }
 
-bool QMXCat::isTX()
+bool CatQMX::isTX()
 {
 	const std::string rsp(exchange("TQ;", 4));
 	if(rsp == "TQ0;") {
@@ -173,7 +173,7 @@ bool QMXCat::isTX()
 	return false;
 }
 
-void QMXCat::setTX(bool tx)
+void CatQMX::setTX(bool tx)
 {
 	sendReq(util::format("TQ%d;", tx ? 1 : 0));
 }
