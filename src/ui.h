@@ -25,6 +25,7 @@ public:
 		EVT_LOG,            /* l: log QSO; data = callsign, space, received rst, space, received exchange */
 		EVT_SEND_TEXT,      /* t: send entered text */
 		EVT_XCHG,           /* x: print current exchange */
+		EVT_MUTE,           /* m: mute / unmute */
 
 		// TODO: allow exchange editing
 	};

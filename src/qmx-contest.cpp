@@ -45,6 +45,7 @@ static void main2(int ac, char *const av[])
 	Exchange exchange(cli.getExchangePrefix(), cli.getExchangeInfix(), cli.getExchangeSuffix());
 	Keyer keyer(wpm);
 	std::set<int> fds{keyer.getFD(), ui.getFD()};
+	int muteGain(-1);
 
 	if(cat->getFD() != -1) {
 		fds.insert(cat->getFD());
@@ -117,28 +118,44 @@ static void main2(int ac, char *const av[])
 
 				// TODO what's the maximum here?
 				case Ui::EVT_GAIN_UP: {
-					unsigned gain(cat->getGain());
-					if(gain < 999) {
-						gain++;
-						ui.print("Set gain to %u dB", gain);
-						cat->setGain(gain);
+					if(muteGain != -1) {
+						/* unmute */
+						ui.print("Set gain to %u dB", muteGain);
+						cat->setGain(muteGain);
+						muteGain = -1;
 					}
 					else {
-						ui.print("Gain %u dB is already maximum", gain);
+						unsigned gain(cat->getGain());
+						if(gain < 999) {
+							gain++;
+							ui.print("Set gain to %u dB", gain);
+							cat->setGain(gain);
+						}
+						else {
+							ui.print("Gain %u dB is already maximum", gain);
+						}
 					}
 					break;
 				}
 
 				// TODO what's the minimum here?
 				case Ui::EVT_GAIN_DOWN: {
-					unsigned gain(cat->getGain());
-					if(gain > 0) {
-						gain--;
-						ui.print("Set gain to %u dB", gain);
-						cat->setGain(gain);
+					if(muteGain != -1) {
+						/* unmute */
+						ui.print("Set gain to %u dB", muteGain);
+						cat->setGain(muteGain);
+						muteGain = -1;
 					}
 					else {
-						ui.print("Gain %u dB is already minimum", gain);
+						unsigned gain(cat->getGain());
+						if(gain > 0) {
+							gain--;
+							ui.print("Set gain to %u dB", gain);
+							cat->setGain(gain);
+						}
+						else {
+							ui.print("Gain %u dB is already minimum", gain);
+						}
 					}
 					break;
 				}
@@ -260,6 +277,21 @@ static void main2(int ac, char *const av[])
 
 				case Ui::EVT_XCHG:
 					ui.print("Exchange to send to the other party: %s", exchange.get().c_str());
+					break;
+
+				case Ui::EVT_MUTE:
+					if(muteGain != -1) {
+						/* unmute */
+						ui.print("Set gain to %u dB", muteGain);
+						cat->setGain(muteGain);
+						muteGain = -1;
+					}
+					else {
+						/* mute */
+						muteGain = cat->getGain();
+						ui.print("Set gain to 0 dB (mute)");
+						cat->setGain(0);
+					}
 					break;
 
 				case Ui::EVT_SEND_TEXT:

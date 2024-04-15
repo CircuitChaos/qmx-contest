@@ -54,11 +54,12 @@ Another example, for non-SP station starting with QSO #01 (so with minimum excha
 
 Text UI is very simple and crude – that's one thing to rework. Generally you press keys and the program reacts. If you press `h`, you'll be presented with the help screen containing the same information as below.
 
-### QMX parameter control
+### QMX control
 
 * up / down: adjust gain
 * left / right: adjust VFO frequency (10 Hz steps)
 * pgup / pgdn: adjust VFO frequency (250 Hz steps)
+* m: mute / unmute
 
 ### Built-in keyer
 
@@ -135,7 +136,6 @@ Lots of things, really. This program is in a very early stage. Feel free to open
 * Log into Cabrillo in uppercase
 * Add frequency presets, or at least one default frequency (set from CLI)
 * Info about number of QSOs in log
-* Mute function
 * Info about bad command key pressed
 * Reloading of log file
 * Generally: log file submenu

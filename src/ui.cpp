@@ -121,6 +121,9 @@ Ui::Event Ui::getEventCmd(const char *buf, size_t sz)
 		case 'x':
 			return EVT_XCHG;
 
+		case 'm':
+			return EVT_MUTE;
+
 		case 'l':
 			print("Enter: <callsign> [<RST>] <exchange>");
 			setMode(MODE_LOG);
@@ -213,10 +216,11 @@ void Ui::showHelp()
 {
 	print("=== Keyboard help ===");
 	print("");
-	print("QMX parameter control:");
+	print("QMX control:");
 	print("- up / down: adjust gain");
 	print("- left / right: adjust VFO frequency (10 Hz steps)");
 	print("- pgup / pgdn: adjust VFO frequency (1 kHz steps)");
+	print("- m: mute / unmute");
 	print("");
 	print("Built-in keyer:");
 	print("- u / d: adjust speed");
