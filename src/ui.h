@@ -26,8 +26,7 @@ public:
 		EVT_SEND_TEXT,      /* t: send entered text */
 		EVT_XCHG,           /* x: print current exchange */
 		EVT_MUTE,           /* m: mute / unmute */
-
-		// TODO: allow exchange editing
+		EVT_FREEZE_TIME,    /* freeze time before QSO logging, must occur before EVT_LOG */
 	};
 
 	struct Event {

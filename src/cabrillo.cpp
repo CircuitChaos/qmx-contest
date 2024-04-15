@@ -1,11 +1,13 @@
-#include <ctime>
 #include "exception.h"
 #include "cabrillo.h"
 #include "file.h"
 
-std::string logCabrillo(const std::string &file, const CabrilloQSO &qso)
+std::string logCabrillo(time_t t, const std::string &file, const CabrilloQSO &qso)
 {
-	const time_t t(time(NULL));
+	if(t == 0) {
+		t = time(NULL);
+	}
+
 	tm tm;
 	gmtime_r(&t, &tm);
 

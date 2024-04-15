@@ -127,7 +127,7 @@ Ui::Event Ui::getEventCmd(const char *buf, size_t sz)
 		case 'l':
 			print("Enter: <callsign> [<RST>] <exchange>");
 			setMode(MODE_LOG);
-			break;
+			return EVT_FREEZE_TIME;
 
 		case 't':
 			print("Enter text to send");
@@ -231,7 +231,7 @@ void Ui::showHelp()
 	print("");
 	print("Logging and contesting:");
 	print("- x: show current exchange");
-	print("- l: log QSO");
+	print("- l: log QSO (time is registered when pressed");
 	print("");
 	print("Program control:");
 	print("- h: show help (this screen)");

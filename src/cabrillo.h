@@ -2,6 +2,7 @@
 
 #include <string>
 #include <inttypes.h>
+#include <ctime>
 
 struct CabrilloQSO {
 public:
@@ -14,4 +15,4 @@ public:
 	std::string rcvdExchange;
 };
 
-std::string logCabrillo(const std::string &file, const CabrilloQSO &qso);
+std::string logCabrillo(time_t t, const std::string &file, const CabrilloQSO &qso);

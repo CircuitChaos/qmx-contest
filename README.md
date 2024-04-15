@@ -72,7 +72,7 @@ Text UI is very simple and crude – that's one thing to rework. Generally you p
 ### Logging and contesting
 
 * x: show current exchange
-* l: log QSO
+* l: log QSO (time is registered when pressed)
 
 ### Program control
 
@@ -131,7 +131,6 @@ Lots of things, really. This program is in a very early stage. Feel free to open
 * Text entry is handled very poorly, basically the only way to clear entered text is Ctrl-U. Using readline() would be much better
 * When sending text, show information about characters that couldn't be mapped to Morse
 * Some smarter handling of a remote callsign – to set it as the current callsign (inserted into presets, checked against the log), or even: enter callsign, automatically send: "&lt;callsign&gt; 5NN &lt;xchg&gt;", and log this QSO
-* Time freeze mode before logging (so we can listen to the QSO again and log it at proper time)
 * Log editing (at least last entry)
 * Log into Cabrillo in uppercase
 * Add frequency presets, or at least one default frequency (set from CLI)

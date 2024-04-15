@@ -1,5 +1,6 @@
 #include <memory>
 #include <unistd.h>
+#include <ctime>
 #include "exception.h"
 #include "qmxdetector.h"
 #include "cat.h"
@@ -46,6 +47,7 @@ static void main2(int ac, char *const av[])
 	Keyer keyer(wpm);
 	std::set<int> fds{keyer.getFD(), ui.getFD()};
 	int muteGain(-1);
+	time_t frozenTime(0);
 
 	if(cat->getFD() != -1) {
 		fds.insert(cat->getFD());
@@ -267,7 +269,8 @@ static void main2(int ac, char *const av[])
 					qso.rcvdCall     = v[0];
 					qso.rcvdRST      = (v.size() == 3) ? v[1] : "599";
 					qso.rcvdExchange = v[(v.size() == 3) ? 2 : 1];
-					ui.print("%s", logCabrillo(cli.getCbrFile(), qso).c_str());
+					ui.print("%s", logCabrillo(frozenTime, cli.getCbrFile(), qso).c_str());
+					frozenTime = 0;
 
 					if(exchange.next()) {
 						ui.print("Next exchange is: %s", exchange.get().c_str());
@@ -292,6 +295,10 @@ static void main2(int ac, char *const av[])
 						ui.print("Set gain to 0 dB (mute)");
 						cat->setGain(0);
 					}
+					break;
+
+				case Ui::EVT_FREEZE_TIME:
+					frozenTime = time(NULL);
 					break;
 
 				case Ui::EVT_SEND_TEXT:
