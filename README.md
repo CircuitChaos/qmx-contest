@@ -44,11 +44,11 @@ will send given text at 20 WPM and exit.
 
 Example to use as a SPDX CW contest logger, for SP station with fixed exchange text („R”), in QSK mode (SP stations send only fixed exchange text, according to their voivodeship):
 
-`qmx-contest -s SP5xxx -f spdx.cbr -x R`
+`qmx-contest -s SP5xxx -f spdx.cbr -P R -I ''`
 
 Another example, for non-SP station starting with QSO #01 (so with minimum exchange text size of two characters), and not using QSK mode:
 
-`qmx-contest -s aabccc -f spdx.cbr -X 01 -q`
+`qmx-contest -s aabccc -f spdx.cbr -I 01 -q`
 
 ## Text UI
 
@@ -122,7 +122,7 @@ Lots of things, really. This program is in a very early stage. Feel free to open
 * Add some limits to frequency values and allow rollbacks (so if we go to 7000 kHz and try to decrement the frequency, we should roll back to 7040 kHz or something, not go to 6999 kHz – make it configurable)
 * Make keyer smarter – currently if text is being sent and another send is attempted, it's rejected, but it should be concatenated
 * Recalculate timeout in interrupted select() calls
-* Smarter CLI handling (for example, -x and -X are mutually exclusive, it's not caught now)
+* Smarter CLI handling (for example, empty exchange is now allowed – it shouldn't be)
 * CAT receive buffer is not flushed properly before sending new command (there's code for it but it doesn't work, use util::watch() with zero timeout and read() in a loop instead)
 * Handle partial writes (in CAT and elsewhere, maybe cmdPipe in the keyer too)
 * There are two pipe pairs in the keyer, a single pair of connected sockets would be better (or cmdPipe replaced with a cond or something)
