@@ -13,6 +13,7 @@ bool inSet(const std::set<T> &set, T value)
 }
 
 std::string format(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
+std::string toUpper(const std::string &s);
 std::string toLower(const std::string &s);
 std::vector<std::string> tokenize(const std::string &s, const std::string &sep, size_t count);
 std::set<int> watch(const std::set<int> &in, int timeout);

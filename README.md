@@ -132,7 +132,6 @@ Lots of things, really. This program is in a very early stage. Feel free to open
 * When sending text, show information about characters that couldn't be mapped to Morse
 * Some smarter handling of a remote callsign – to set it as the current callsign (inserted into presets, checked against the log), or even: enter callsign, automatically send: "&lt;callsign&gt; 5NN &lt;xchg&gt;", and log this QSO
 * Log editing (at least last entry)
-* Log into Cabrillo in uppercase
 * Add frequency presets, or at least one default frequency (set from CLI)
 * Info about number of QSOs in log
 * Info about bad command key pressed

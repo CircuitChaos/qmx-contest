@@ -1,5 +1,6 @@
 #include "exception.h"
 #include "cabrillo.h"
+#include "util.h"
 #include "file.h"
 
 std::string logCabrillo(time_t t, const std::string &file, const CabrilloQSO &qso)
@@ -17,12 +18,12 @@ std::string logCabrillo(time_t t, const std::string &file, const CabrilloQSO &qs
 	const std::string s(util::format("QSO: %u CW %s %s %s %s %s %s %s",
 	    qso.freq / 1000,
 	    datetime,
-	    qso.sentCall.c_str(),
-	    qso.sentRST.c_str(),
-	    qso.sentExchange.c_str(),
-	    qso.rcvdCall.c_str(),
-	    qso.rcvdRST.c_str(),
-	    qso.rcvdExchange.c_str()));
+	    util::toUpper(qso.sentCall).c_str(),
+	    util::toUpper(qso.sentRST).c_str(),
+	    util::toUpper(qso.sentExchange).c_str(),
+	    util::toUpper(qso.rcvdCall).c_str(),
+	    util::toUpper(qso.rcvdRST).c_str(),
+	    util::toUpper(qso.rcvdExchange).c_str()));
 
 	if(!file.empty()) {
 		File fp(fopen(file.c_str(), "ab"));

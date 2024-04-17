@@ -26,6 +26,13 @@ std::string util::format(const char *fmt, ...)
 	return s;
 }
 
+std::string util::toUpper(const std::string &s)
+{
+	std::string rs(s);
+	std::transform(rs.begin(), rs.end(), rs.begin(), [](char ch) { return std::toupper(ch); });
+	return rs;
+}
+
 std::string util::toLower(const std::string &s)
 {
 	std::string rs(s);
