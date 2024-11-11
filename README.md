@@ -120,8 +120,10 @@ Lots of things, really. This program is in a very early stage. Feel free to open
 * Add some reasonable limits to the gain
 * Add some reasonable limits to the WPM
 * Prevent frequency changes when sending
-* Add some limits to frequency values and allow rollbacks (so if we go to 7000 kHz and try to decrement the frequency, we should roll back to 7040 kHz or something, not go to 6999 kHz – make it configurable)
+* Add frequency limits for the CW band (as an option)
+* Allow frequency rollbacks (so if we go to 7000 kHz and try to decrement the frequency, we should roll back to 7040 kHz or something, not go to 6999 kHz – make it configurable)
 * Make keyer smarter – currently if text is being sent and another send is attempted, it's rejected, but it should be concatenated
+* Seems that QMX finally supports sending CW text via CAT – use it
 * Recalculate timeout in interrupted select() calls
 * Smarter CLI handling (for example, empty exchange is now allowed – it shouldn't be)
 * CAT receive buffer is not flushed properly before sending new command (there's code for it but it doesn't work, use util::watch() with zero timeout and read() in a loop instead)
