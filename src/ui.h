@@ -16,6 +16,7 @@ public:
 		EVT_FREQ_DOWN_SLOW, /* arrow left */
 		EVT_FREQ_UP_FAST,   /* pgup */
 		EVT_FREQ_DOWN_FAST, /* pgdn */
+		EVT_FREQ_RESET,     /* = */
 		EVT_WPM_UP,         /* u: keyer speed up */
 		EVT_WPM_DOWN,       /* d: keyer speed down */
 		EVT_QUIT,           /* q */

@@ -124,6 +124,9 @@ Ui::Event Ui::getEventCmd(const char *buf, size_t sz)
 		case 'm':
 			return EVT_MUTE;
 
+		case '=':
+			return EVT_FREQ_RESET;
+
 		case 'l':
 			print("Enter: <callsign> [<RST>] <exchange>");
 			setMode(MODE_LOG);

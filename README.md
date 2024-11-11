@@ -59,6 +59,7 @@ Text UI is very simple and crude – that's one thing to rework. Generally you p
 * up / down: adjust gain
 * left / right: adjust VFO frequency (10 Hz steps)
 * pgup / pgdn: adjust VFO frequency (250 Hz steps)
+* =: go to beginning of the band
 * m: mute / unmute
 
 ### Built-in keyer

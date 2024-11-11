@@ -17,6 +17,44 @@
 #include "presets.h"
 #include "ui.h"
 #include "exchange.h"
+#include "bands.h"
+
+static void adjustFreq(std::unique_ptr<Cat> &cat, Ui &ui, Ui::EventType evt)
+{
+	uint32_t freq(cat->getFreq());
+	uint32_t bottom, top;
+	if(!bands::getLimits(freq, bottom, top)) {
+		ui.print("Cannot adjust freq -- out of band");
+		return;
+	}
+
+	if(evt == Ui::EVT_FREQ_RESET) {
+		freq = bottom;
+	}
+	else if(evt == Ui::EVT_FREQ_DOWN_SLOW || evt == Ui::EVT_FREQ_DOWN_FAST) {
+		const uint32_t delta((evt == Ui::EVT_FREQ_DOWN_SLOW) ? 10 : 250);
+		if(freq < delta) {
+			xthrow("Frequency too low -- internal inconsistency");
+		}
+
+		freq -= delta;
+		if(freq < bottom) {
+			ui.print("Cannot adjust freq -- already at the minimum");
+			return;
+		}
+	}
+	else if(evt == Ui::EVT_FREQ_UP_SLOW || evt == Ui::EVT_FREQ_UP_FAST) {
+		const uint32_t delta((evt == Ui::EVT_FREQ_UP_SLOW) ? 10 : 250);
+		freq += delta;
+		if(freq > top) {
+			ui.print("Cannot adjust freq -- already at the maximum");
+			return;
+		}
+	}
+
+	ui.print("Set freq to %u.%03u kHz", freq / 1000, freq % 1000);
+	cat->setFreq(freq);
+}
 
 static void main2(int ac, char *const av[])
 {
@@ -162,35 +200,14 @@ static void main2(int ac, char *const av[])
 					break;
 				}
 
-				// TODO redo freq, add some limits or rollbacks, do it smarter
 				// TODO don't touch freq when keyer is active
-				case Ui::EVT_FREQ_UP_SLOW: {
-					const uint32_t freq(cat->getFreq() + 10);
-					ui.print("Set freq to %u.%03u kHz", freq / 1000, freq % 1000);
-					cat->setFreq(freq);
+				case Ui::EVT_FREQ_UP_SLOW:
+				case Ui::EVT_FREQ_DOWN_SLOW:
+				case Ui::EVT_FREQ_UP_FAST:
+				case Ui::EVT_FREQ_DOWN_FAST:
+				case Ui::EVT_FREQ_RESET:
+					adjustFreq(cat, ui, evt.type);
 					break;
-				}
-
-				case Ui::EVT_FREQ_DOWN_SLOW: {
-					const uint32_t freq(cat->getFreq() - 10);
-					ui.print("Set freq to %u.%03u kHz", freq / 1000, freq % 1000);
-					cat->setFreq(freq);
-					break;
-				}
-
-				case Ui::EVT_FREQ_UP_FAST: {
-					const uint32_t freq(cat->getFreq() + 250);
-					ui.print("Set freq to %u.%03u kHz", freq / 1000, freq % 1000);
-					cat->setFreq(freq);
-					break;
-				}
-
-				case Ui::EVT_FREQ_DOWN_FAST: {
-					const uint32_t freq(cat->getFreq() - 250);
-					ui.print("Set freq to %u.%03u kHz", freq / 1000, freq % 1000);
-					cat->setFreq(freq);
-					break;
-				}
 
 				case Ui::EVT_WPM_UP:
 					if(wpm < 99) {
