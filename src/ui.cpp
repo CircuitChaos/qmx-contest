@@ -234,7 +234,7 @@ void Ui::showHelp()
 	print("");
 	print("Logging and contesting:");
 	print("- x: show current exchange");
-	print("- l: log QSO (time is registered when pressed");
+	print("- l: log QSO (time is registered when pressed)");
 	print("");
 	print("Program control:");
 	print("- h: show help (this screen)");
