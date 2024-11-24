@@ -106,7 +106,21 @@ That's a lot of steps per symbol, so if it results in a jittery code being gener
 
 Lots of things, really. This program is in a very early stage. Feel free to open PRs.
 
+### High priority
+
+* Key 'c' to check callsign (show CQ zone, ITU zone, check if it's in database of known callsigns, check if it's in log) – automatically load the log file if it's been edited by hand
+* Support for cut numbers (so we can send A5 for CQ zone 15, but still have 15 in log)
+* Band
+
+### Rest
+
+* Band limits for CW
+* Band switch
+* Frequency could be entered from keyboard
+* Add panadapter (IQ mode, might be tricky if we still want to run Audacity together with the program)
 * Exchange should be editable in UI
+* Add preset sets (for example, separate sets for fox and hound modes)
+* Investigate if it's possible to show that QMX entered SWR protection (some CAT command or something)
 * UI interactions should be optionally logged to some file
 * Add some thread to read incoming audio and display its average intensity over time (FFT waterfall is not really needed, something simpler should do), so it would be possible to decode Morse visually if it's too fast for the ears; might not be needed, as Audacity does great job as a recorder with preview
 * Add incoming audio recording; probably not needed, see above comment about Audacity
@@ -121,7 +135,7 @@ Lots of things, really. This program is in a very early stage. Feel free to open
 * Add some reasonable limits to the WPM
 * Prevent frequency changes when sending
 * Add frequency limits for the CW band (as an option)
-* Allow frequency rollbacks (so if we go to 7000 kHz and try to decrement the frequency, we should roll back to 7040 kHz or something, not go to 6999 kHz – make it configurable)
+* Allow frequency rollbacks (so if we go to 7000 kHz and try to decrement the frequency, we should roll back to 7040 kHz or something, not go to 6999 kHz – make it configurable) – or maybe make it different and just set minimum or maximum frequency then?
 * Make keyer smarter – currently if text is being sent and another send is attempted, it's rejected, but it should be concatenated
 * Seems that QMX finally supports sending CW text via CAT – use it
 * Recalculate timeout in interrupted select() calls
